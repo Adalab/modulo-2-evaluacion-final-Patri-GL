@@ -2,4 +2,89 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 1rem;
+  color: white;
+  background-color: darkslategrey;
+}
+h3 {
+  font-size: 2rem;
+}
+
+header {
+  padding: 2rem;
+  border-bottom: solid goldenrod;
+  display: flex;
+  align-content: center;
+}
+
+footer {
+  padding: 2rem;
+  border-top: solid goldenrod;
+  display: flex;
+  align-content: center;
+}
+
+main {
+  padding: 2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.btn {
+  background-color: goldenrod;
+  border: none;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: black;
+}
+
+.searchInput {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  height: 50px;
+  outline: none;
+  transition: 0.2s ease-out;
+  position: sticky;
+  top: 5px;
+  z-index: 123;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 10rem;
+  padding-top: 2rem;
+}
+figure {
+  display: table;
+}
+
+figcaption {
+  display: table-caption;
+  caption-side: bottom;
+}
+
+.favoriteList {
+  background-color: lightsalmon;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bolder;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  border: solid black;
 }

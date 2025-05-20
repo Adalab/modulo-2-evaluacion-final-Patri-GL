@@ -17,11 +17,12 @@
       <h2 class="siteTitleHeader">Anime Shows Search Site</h2>
     </header>
     <main>
+      <section>
       <label class="searchBox js_searchBox" for="site-search"
         >Search the site:</label
       >
       <input
-        class="js_searchInput"
+        class="js_searchInput searchInput"
         type="search"
         id="site-search"
         name="q"
@@ -29,29 +30,17 @@
       />
       <button class="btn js_searchBtn">Search</button>
       <button class="btn js_resetBtn">Reset</button>
-      <ul class="js_movieList list">
-        <!-- <li class="listedItem js_listedmovie">
-          <img
-            src="https://cdn.myanimelist.net/images/anime/4/19644.jpg"
-            alt="Cowboy Bepop"
-          />
-          <figcaption>Cowboy Bepop</figcaption>
-        </li>
-        <li class="listItem js_listitem">
-          <img
-            src="https://cdn.myanimelist.net/images/anime/7/21569.jpg"
-            alt="Bouken Ou Beet"
-          />
-          <figcaption>Bouken Ou Beet</figcaption>
-        </li>
-        <li class="listItem js_listitem">
-          <img
-            src="https://cdn.myanimelist.net/images/anime/1079/133529.jpg"
-            alt="Eyeshield21"
-          />
-          <figcaption>Eyeshield21</figcaption>
-        </li> -->
-      </ul>
+      <section class="content">
+        
+        <section class="favouriteSection">
+          <h3 class="title">My favourite Movies</h3>
+          <ul class="js_favouritesMovies favoriteList"></ul>
+        </section>
+        <section class="listingSection">
+          <h3 class="title">My listed Movies</h3>
+          <ul class="js_movieList movieList"></ul>
+        </section>
+      </section>
     </main>
     <footer>&copy; Anime Search Inc.</footer>
     <script src="./js/main.js"></script>
