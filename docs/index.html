@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anime Shows Site</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    
+    <link rel="icon" href="./images/favicon.png" />
+    <link rel="stylesheet" href="./assets/index-32911a54.css">
+  </head>
+
+  <body>
+    <header>
+      <h2 class="siteTitleHeader">Anime Shows Search Site</h2>
+    </header>
+    <main>
+      <section>
+      <label class="searchBox js_searchBox" for="site-search"
+        >Search the site:</label
+      >
+      <input
+        class="js_searchInput searchInput"
+        type="search"
+        id="site-search"
+        name="q"
+        placeholder="Type your search"
+      />
+      <button class="btn js_searchBtn">Search</button>
+      <button class="btn js_resetBtn">Reset</button>
+      <section class="content">
+        
+        <section class="favouriteSection">
+          <h3 class="title">My favourite Movies</h3>
+          <ul class="js_favouriteMovies favoriteList"></ul>
+        </section>
+        <section class="listingSection">
+          <h3 class="title">My listed Movies</h3>
+          <ul class="js_movieList movieList"></ul>
+        </section>
+      </section>
+    </main>
+    <footer>&copy; Anime Search Inc.</footer>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
