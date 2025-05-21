@@ -2,6 +2,7 @@
 
 console.log(">> Ready :)");
 
+//CONNECTION TO THE HTML
 const movieList = document.querySelector(".js_movieList");
 const searchBox = document.querySelector(".js_searchBox");
 const searchInput = document.querySelector(".js_searchInput");
@@ -9,17 +10,20 @@ const searchBtn = document.querySelector(".js_searchBtn");
 const favouriteMovies = document.querySelector(".js_favouriteMovies");
 const resetBtn = document.querySelector(".js_resetBtn");
 
+//DATA TO BE USED LATER ON
 const oneMovie = {
   mal_id: "20",
   image_url: "https://cdn.myanimelist.net/images/anime/1141/142503.jpg",
   title: "Naruto",
 };
-
 let allMovies = [];
-let favourite = [];
+let myAnimeMovies = [];
+let imageUrl;
 
+//FUNCTIONS
+//1. TO CREATE ONE MOVIE CARD. USING TERNIARY CONDITIONAL, BECAUSE IF-ELSE GAVE BACK AN ERROR THAT WOULD BREAK MY WHOLE JS
 function renderOneMovie(oneMovie) {
-  const html = `<li  class="listItem js_listitem" data-mal_id="${
+  const html = `<li  class="listItem js_listitem" data-mal_hook="${
     oneMovie.mal_id
   }">
          <figure> <img
@@ -36,6 +40,7 @@ function renderOneMovie(oneMovie) {
   return html;
 }
 
+//2. TO SHOW ALL MOVIE CARDS, WE ARE ADDING THE QUERY SELECTOR ALL HERE BECAUSE WE NEED ASIGN EVENTS LATER ON.
 function renderAllMovies() {
   let html = "";
   for (const oneMovie of allMovies) {
@@ -43,13 +48,21 @@ function renderAllMovies() {
   }
   movieList.innerHTML = html;
 
-  // Asignar eventos
   const allListItems = document.querySelectorAll(".js_listitem");
   for (const oneListItem of allListItems) {
     oneListItem.addEventListener("click", handleClickMovie);
   }
 }
 
+function renderAllFavouriteMovies() {
+  favouriteMovies.innerHTML = "";
+  for (const oneMovie of myAnimeMovies) {
+    html += renderOneMovie(oneMovie);
+
+    favouriteMovies.innerHTML = html;
+  }
+}
+//3. ARROW FUNCTION TO MAKE SEARCHES FILTERING ACROSS THE API DATABASE. USING TRIM SO THE MACHINE WILL ADAPT TO ANY MISTAKES OF THE USER, SINCE WE WERE NOT REQUESTED TO GIVE BACK AN ERROR WHEN MISYTPING
 const filterMovie = (event) => {
   event.preventDefault();
   const searchQuery = searchInput.value.trim();
@@ -61,16 +74,45 @@ const filterMovie = (event) => {
       renderAllMovies(allMovies);
     });
 };
+//4. ADDING AN EVENT LISTENER CLICK FOR THE FILTER MOVIE FUNCTION
 searchBtn.addEventListener("click", filterMovie);
 
+//5. FUNCTION LINKED TO N2 TO ADD AND REMOVE THE FAVOURITE CLASS TO EACH CARD UPON CLICKING, WENT TROUGH CHALLENGES HERE TO RECOGNISE THE 'HOOK'
 function handleClickMovie(ev) {
   const clickedListItem = ev.currentTarget;
   clickedListItem.classList.toggle("favourite");
 
-  const mal_id = parseInt(clickedListItem.dataset.mal_id);
-  console.log("MAL ID:", mal_id);
-}
+  const idMal_hook = parseInt(clickedListItem.dataset.mal_hook);
+  console.log("MAL ID:", idMal_hook);
 
+  //5.1 FINDING THE POSITION OF MY SELECTED FAVORITE CARD AMONGST ALL FAVOURITE MOVIES SO I CAN DO MY CONDITIONALS LATER ON TO ADD AND REMOVE
+  const moviePositionInFavs = myAnimeMovies.findIndex(
+    (oneMovie) => oneMovie.mal_id === idMal_hook
+  );
+  //5.2 ADDING MY FAVOURITE ANIME MOVIE CARDS TO MY ARRAY myAnimeMovies = [] AND MY LIST ON THE LEFT
+  if (moviePositionInFavs === -1) {
+    console.log("Your selected movie is missing from favourites");
+
+    const clickedMovieCard = allMovies.find(
+      (oneMovie) => oneMovie.mal_id === idMal_hook
+    );
+    myAnimeMovies.push(clickedMovieCard);
+    localStorage.setItem("favouriteMovies", JSON.stringify(myAnimeMovies));
+    const htmlOneMovieCard = renderOneMovie(clickedMovieCard);
+    favouriteMovies.innerHTML += htmlOneMovieCard;
+  } else {
+    //5.3 REMOVING A MOVIE FROM MY ARRAY AND THE LIST TO AVOID DUPLICATES. GHF
+    console.log("Your movie is found within your favourite movies");
+    const [removingMovies] = myAnimeMovies.splice(moviePositionInFavs, 1);
+    const favItemToRemove = favouriteMovies.querySelector(
+      `[data-mal_hook="${removingMovies.mal_id}"]`
+    );
+    if (favItemToRemove !== null) {
+      favItemToRemove.remove();
+    }
+  }
+}
+// 6. FETCHING DATA, IE LINKING TO THE API DB
 fetch("https://api.jikan.moe/v4/anime?q=naruto")
   .then((res) => res.json())
   .then((data) => {
@@ -78,3 +120,9 @@ fetch("https://api.jikan.moe/v4/anime?q=naruto")
 
     renderAllMovies();
   });
+
+const myMoviesfromLS = JSON.parse(localStorage.getItem("favouriteMovies"));
+if (myMoviesfromLS !== null) {
+  myAnimeMovies = myMoviesfromLS;
+  renderAllFavouriteMovies();
+}
