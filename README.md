@@ -1,6 +1,6 @@
 # Anime Shows Search site
 
-[Anonymous Proxy](http://beta.adalab.es/modulo-1-evaluacion-final-Patri-GL/) website has been created as an evaluation exercise of module 2 within the [Adalab](https://adalab.es/) context of the Web Programming Intensive Bootcamp.
+[Anime Shows Search Site](http://beta.adalab.es/modulo-2-evaluacion-final-Patri-GL/) website has been created as an evaluation exercise of module 2 within the [Adalab](https://adalab.es/) context of the Web Programming Intensive Bootcamp.
 
 ## Author
 
@@ -20,7 +20,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Lessons Learned
 
-Basics web layout design in HTML and CSS were practiced here, the main lesson here is practise of JavaScript.
+Basics web layout design in HTML and CSS were practiced here, the main lesson here is practise of JavaScript, storing on LocalStorage and connecting with an API.
 
 Plus use of GitHub
 
