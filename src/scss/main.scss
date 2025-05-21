@@ -55,8 +55,8 @@ ul {
   height: 3.2rem;
 }
 .content {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10rem;
   padding-top: 2rem;
 }
